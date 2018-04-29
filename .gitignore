@@ -1,0 +1,12 @@
+.hgignore
+.hg
+.vscode
+.DS_Store
+
+BUILD
+setup.sh
+mbed_settings.py
+mbed_settings.pyc
+
+mbed-os/TESTS
+libmDot-mbed5/.hg

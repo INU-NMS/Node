@@ -1,0 +1,30 @@
+{
+    "Target": {
+        "core": null,
+        "default_toolchain": "ARM",
+        "supported_toolchains": null,
+        "extra_labels": [],
+        "is_disk_virtual": false,
+        "macros": [],
+        "device_has": [],
+        "features": [],
+        "detect_code": [],
+        "public": false,
+        "default_lib": "std",
+        "bootloader_supported": false
+    },
+    "MTS_MDOT_F411RE": {
+        "inherits": ["Target"],
+        "core": "Cortex-M4F",
+        "supported_toolchains": ["ARM", "uARM", "GCC_ARM", "IAR"],
+        "extra_labels": ["STM", "STM32F4", "STM32F411RE"],
+        "macros": ["HSE_VALUE=26000000", "USE_PLL_HSE_EXTC=0", "VECT_TAB_OFFSET=0x00010000","TRANSACTION_QUEUE_SIZE_SPI=2"],
+        "post_binary_hook": {
+            "function": "MTSCode.combine_bins_mts_dot",
+            "toolchains": ["GCC_ARM", "ARM_STD", "ARM_MICRO", "IAR"]
+        },
+        "device_has": ["ANALOGIN", "I2C", "I2CSLAVE", "INTERRUPTIN", "PORTIN", "PORTINOUT", "PORTOUT", "PWMOUT", "RTC", "SERIAL", "SLEEP", "SPI", "SPISLAVE", "SPI_ASYNCH", "STDIO_MESSAGES"],
+        "release_versions": ["2", "5"],
+        "device_name": "STM32F411RE"
+    }
+}
