@@ -11,6 +11,7 @@
 #define SENDING 2
 
 bool sending = false;
+Timer timer;
 
 void setPower(uint8_t& power) {
     dot->setTxPower(power);
@@ -37,15 +38,17 @@ bool isSending() {
 uint8_t send(vector<uint8_t>& data) {    
     if(sending) return SENDING;
     sending = true;
+    timer.reset();
+    timer.start();
     if(dot->send(data) == mDot::MDOT_OK) {
-        printf("RSSI: %d\r\n", dot->getRssiStats().last);
-        // 수신 성공
+        timer.stop();
+        printf("ack=%d\r\n", timer.read_ms());
+        //printf("ack=%d\r\n", dot->getRssiStats().last);
     }else {
-        printf("No Ack\r\n");
+        printf("ack=NaN\r\n");
         // 수신 실패
     }
     sending = false;
-    printf("TX DONE\r\n");
     return SEND_DONE;
 }
 
